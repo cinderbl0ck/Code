@@ -1,6 +1,13 @@
 Homework: figure out linux/unix commands to move around in the directory tree, create, move, and rename folders.
-control tilda terminal in editor
+control tilda to bring up terminal in editor
 the birth and death of javascript video
 variables
 use terminal to test whether it will work before committing
 python learn commands ;;; def for if = == 
+
+objects / dictionary / class 
+''' or # comments 
+command +shift +p in text editor will bring up text editor options such as Format for formatting html documents
+command +p will bring up spotlight search functionality and should be used to access files
+git add -p (go through each change and add it or not)
+git add <filename> (put filename that you want to add)

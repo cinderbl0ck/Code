@@ -1,25 +1,38 @@
+import re
 import urllib.request
+import sys
+from html.parser import HTMLParser
+from pprint import pprint
 
-def count_ts(text):
-    '''count_ts counts the number of times the letter "t" occurs in text, must be a bytearray'''
-    count = 0
-    for letter in text:
-        if letter == 116:
-            count = count + 1 
-    return count 
+webpage_url = "http://pinchmysalt.com/recipe-list/"
 
-def count_fuck(text):
-    '''count_fuck counts the number of times the letters "f" "u" "c" "k" are present in text, bytearrayformat '''
-    count117 = 0
-    count107 = 0
-    count102 = 0
-    count99 = 0
-    for letter in text:
-        if letter == 117: count117 += 1
-        if letter == 107: count107 += 1
-        if letter == 102: count102 += 1
-        if letter == 99: count99 += 1
-    return min(count117, count107, count102, count99)
+class RecipeLinkHTMLParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.recipe_list = {}
 
-recipe_list = urllib.request.urlopen("http://pinchmysalt.com/recipe-list/").read()
-print(count_ts(recipe_list))
+    def handle_starttag(self,tag,attributes):
+        if len(attributes) < 2:
+            return
+        if attributes[0][0] != 'title':
+            return
+        if attributes[1][0] != 'href':
+            return
+        if tag != 'a':
+            return
+        
+        recipe_name = attributes[0][1]
+        recipe_url = attributes[1][1]
+        self.recipe_list[recipe_name] = recipe_url
+
+    def print(self):
+        pprint(self.recipe_list)
+
+recipe_list_html = urllib.request.urlopen(webpage_url).read().decode()
+parser = RecipeLinkHTMLParser()
+parser.feed(recipe_list_html)
+parser.print()
+
+
+
+
