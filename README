@@ -15,5 +15,7 @@ git status
 git add -p (go through each change and add it or not)
 git add <filename> (put filename that you want to add)
 git commit -m "use a name that doesn't suck as that is what everyone can see"
-git push
+git push origin master
 git mv <source> <destination> (when moving files to ensure git update)
+
+how to run sql script to create database and import/run migration file sqlite3 recipes.db < migrations/000-create-database.sql
