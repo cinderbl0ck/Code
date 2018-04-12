@@ -9,9 +9,11 @@ objects / dictionary / class
 ''' or # comments 
 command +shift +p in text editor will bring up text editor options such as Format for formatting html documents
 command +p will bring up spotlight search functionality and should be used to access files
+control +r will search previous commands entered
 TYPE VERBATIM OR DEAD 
 git status 
 git add -p (go through each change and add it or not)
 git add <filename> (put filename that you want to add)
 git commit -m "use a name that doesn't suck as that is what everyone can see"
 git push
+git mv <source> <destination> (when moving files to ensure git update)
