@@ -19,3 +19,15 @@ git push origin master
 git mv <source> <destination> (when moving files to ensure git update)
 
 how to run sql script to create database and import/run migration file sqlite3 recipes.db < migrations/000-create-database.sql
+
+------------------------------------------------------------
+
+terminal directory navigation
+
+cd = change directory and takes to home (Jams) when used alone
+.. navigates one directory up
+cd ‘directory_name’  navigates to named directory
+pwd = print working directory
+ls = list files in current directory
+ls -la = detailed ls
+. = current directory
