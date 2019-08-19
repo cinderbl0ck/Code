@@ -20,24 +20,13 @@ worksheet = workbook.add_worksheet('Employees')
 
 row = 0
 col = 0
-#item_list = []
 
 c.execute("SELECT * FROM employees")
 for item in c.fetchall():
-#	item_list.append(item)
 	worksheet.write(row, col,   item[0])
 	worksheet.write(row, col+1, item[1])
 	worksheet.write(row, col+2, item[2])
 	row += 1
-
-#print(item_list)
-#print(type(item_list))
-
-#for list_data in item_list:
-#  worksheet.write(row, col,   list_data[0])
-#  worksheet.write(row, col+1, list_data[1])
-#  worksheet.write(row, col+2, list_data[2])
-#  row += 1
 
 workbook.close()
 conn.commit()
