@@ -4,6 +4,7 @@ from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
+import xlsxwriter
 
 bp = Blueprint('blog', __name__)
 
@@ -17,7 +18,7 @@ def index():
 	).fetchall()
 	return render_template('blog/index.html', posts=posts)
 
-@bp.route('/create', methods=('GET', 'POST'))
+@bp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
 	if request.method == 'POST':
@@ -59,7 +60,7 @@ def get_post(id, check_author=True):
 
 	return post
 
-@bp.route('/<int:id>/update', methods=('GET', 'POST'))
+@bp.route('/<int:id>/update', methods=['GET', 'POST'])
 @login_required
 def update(id):
 	post = get_post(id)
@@ -86,7 +87,7 @@ def update(id):
 
 	return render_template('blog/update.html', post=post)
 
-@bp.route('/<int:id>/delete', methods=('POST',))
+@bp.route('/<int:id>/delete', methods=['POST'])
 @login_required
 def delete(id):
 	get_post(id)
@@ -96,12 +97,33 @@ def delete(id):
 	return redirect(url_for('blog.index'))
 
 
+@bp.route('/export', methods=['GET'])
+#@login_required
+def export():
+	db = get_db()
+	cursor = db.execute(
+		'SELECT p.id, title, body, created, author_id, username'
+		' FROM post p JOIN user u ON p.author_id = u.id'
+		' ORDER BY created DESC'
+	)
 
+	workbook = xlsxwriter.Workbook('Posts.xlsx')
+	worksheet = workbook.add_worksheet()
 
+#	bold = workbook.add_format({'bold': True})
 
+#	worksheet.write('A1', 'Post ID', bold)
+#	worksheet.write('B1', 'Title', bold)
+#	worksheet.write('C1', 'Body', bold)
+#	worksheet.write('D1', 'Created', bold)	
+#	worksheet.write('E1', 'Author ID', bold)
+#	worksheet.write('F1', 'Username', bold)
 
-
-
+#	for index, row in enumerate(cursor):
+#		worksheet.write(index, 0, row)
+		
+	workbook.close()
+	return render_template('blog/export.html')
 
 
 
