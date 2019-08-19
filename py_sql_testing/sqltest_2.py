@@ -1,3 +1,4 @@
+# https://python-course.eu/sql_python.php
 # assumes company.db with table employee has already been created
 import sqlite3
 connection = sqlite3.connect("company.db")

@@ -3,3 +3,13 @@ recipe-list.html
 recipes/recipes.db
 recipes/recipes_backup_rawhtmlupdate.db
 spring-fling-a-fool-for-rhubarb.html
+venv/
+*.pyc
+__pycache__/
+instance/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/

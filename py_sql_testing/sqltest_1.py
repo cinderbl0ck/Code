@@ -1,3 +1,4 @@
+# https://python-course.eu/sql_python.php
 import sqlite3
 connection = sqlite3.connect("company.db")
 
