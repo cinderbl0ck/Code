@@ -100,8 +100,8 @@ def delete(id):
 @bp.route('/export', methods=['GET'])
 #@login_required
 def export():
-	db = get_db()
-	cursor = db.execute(
+	conn = get_db()
+	c = conn.execute(
 		'SELECT p.id, title, body, created, author_id, username'
 		' FROM post p JOIN user u ON p.author_id = u.id'
 		' ORDER BY created DESC'
@@ -110,20 +110,22 @@ def export():
 	workbook = xlsxwriter.Workbook('Posts.xlsx')
 	worksheet = workbook.add_worksheet()
 
-#	bold = workbook.add_format({'bold': True})
+	row = 0
+	col = 0
 
-#	worksheet.write('A1', 'Post ID', bold)
-#	worksheet.write('B1', 'Title', bold)
-#	worksheet.write('C1', 'Body', bold)
-#	worksheet.write('D1', 'Created', bold)	
-#	worksheet.write('E1', 'Author ID', bold)
-#	worksheet.write('F1', 'Username', bold)
+	c.execute("SELECT * FROM post")
+	for item in c.fetchall():
+		worksheet.write(row, col,   item[0])
+		worksheet.write(row, col+1, item[1])
+		worksheet.write(row, col+2, item[2])
+		worksheet.write(row, col+3, item[3])
+		worksheet.write(row, col+4, item[4])
+		row += 1
 
-#	for index, row in enumerate(cursor):
-#		worksheet.write(index, 0, row)
-		
 	workbook.close()
-	return render_template('blog/export.html')
+	conn.commit()
+	conn.close()
+	return redirect(url_for('blog.index'))
 
 
 
