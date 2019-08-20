@@ -33,9 +33,9 @@ ls -la = detailed ls
 . = current directory
 
 -------------------------------------------------------------
-from flask-tutorial folder
+from flaskr folder
 source flaskr_venv/bin/activate (source runs a shell script)
-source env.sh
-flask run
+from flaskr-tutorial folder
+pip install -e .
 ----------
 add to web server another path if you go to /excel it will download the contents of the database in a microsoft excel format
