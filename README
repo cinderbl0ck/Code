@@ -37,5 +37,8 @@ from flaskr folder
 source flaskr_venv/bin/activate (source runs a shell script)
 from flaskr-tutorial folder
 pip install -e .
+flask run
 ----------
-add to web server another path if you go to /excel it will download the contents of the database in a microsoft excel format
+add to web server another path if you go to /excel it will download the contents of the database in a microsoft excel format - Completed
+---------------
+add option to download file generated via the browser download option instead of locally

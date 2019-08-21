@@ -1,5 +1,5 @@
 from flask import (
-	Blueprint, flash, g, redirect, render_template, request, url_for)
+	Blueprint, flash, g, redirect, render_template, request, url_for, send_file)
 from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
@@ -96,10 +96,14 @@ def delete(id):
 	db.commit()
 	return redirect(url_for('blog.index'))
 
-
 @bp.route('/export', methods=['GET'])
-#@login_required
+@login_required
 def export():
+	return render_template('blog/export.html')
+
+@bp.route('/get_files/', methods=['GET', 'POST'])
+@login_required
+def get_files():
 	conn = get_db()
 	c = conn.execute(
 		'SELECT p.id, title, body, created, author_id, username'
@@ -125,21 +129,6 @@ def export():
 	workbook.close()
 	conn.commit()
 	conn.close()
-	return redirect(url_for('blog.index'))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return send_file('/Users/Jams/Code/flask-tutorial/Posts.xlsx', as_attachment=True, attachment_filename='Posts.xlsx')
 

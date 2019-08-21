@@ -13,6 +13,7 @@ flaskr.egg-info/not-zip-safe
 flaskr.egg-info/requires.txt
 flaskr.egg-info/top_level.txt
 flaskr/static/style.css
+flaskr/templates/.DS_Store
 flaskr/templates/base.html
 flaskr/templates/auth/login.html
 flaskr/templates/auth/register.html

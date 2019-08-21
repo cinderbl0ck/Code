@@ -1,9 +1,10 @@
-  {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block header %}
-	<h1>{% block title %}Export Requested{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-	<h1>{% block title %}Please check for your requested file in directory.{% endblock %}</h1>
-{% endblock %}	
+	<div class="container" align="left">
+		<a href="/get_files/"><button>Export</button></a>
+	</div>
+{% endblock %}
