@@ -130,9 +130,7 @@ def get_files():
 
 	workbook.close()
 
-	xlsx_data = output.getvalue()
-
-	response = make_response(xlsx_data)
+	response = make_response(output.getvalue())
 	response.headers['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 	response.headers['Content-Disposition'] = 'attachment; filename="Posts.xlsx"'
 
