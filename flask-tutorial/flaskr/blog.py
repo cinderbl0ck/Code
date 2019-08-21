@@ -5,7 +5,7 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 import xlsxwriter
-import io
+from io import BytesIO
 
 bp = Blueprint('blog', __name__)
 
@@ -112,8 +112,8 @@ def get_files():
 		' ORDER BY created DESC'
 	)
 
-	output = io.BytesIO()
-	workbook = xlsxwriter.Workbook('Posts.xlsx', {'in_memory': True})
+	output = BytesIO()
+	workbook = xlsxwriter.Workbook(output, {'in_memory': True})
 	worksheet = workbook.add_worksheet()
 
 	row = 0
@@ -129,9 +129,10 @@ def get_files():
 		row += 1
 
 	workbook.close()
-	output.seek(0)
 
-	response = make_response(bytes(output))
+	xlsx_data = output.getvalue()
+
+	response = make_response(xlsx_data)
 	response.headers['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 	response.headers['Content-Disposition'] = 'attachment; filename="Posts.xlsx"'
 
