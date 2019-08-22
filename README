@@ -33,9 +33,8 @@ ls -la = detailed ls
 . = current directory
 
 -------------------------------------------------------------
-from flaskr folder
-source flaskr_venv/bin/activate (source runs a shell script)
 from flaskr-tutorial folder
+source flaskr_venv/bin/activate (source runs a shell script)
 pip install -e .
 flask run
 ----------

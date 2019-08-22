@@ -102,7 +102,7 @@ def delete(id):
 def export():
 	return render_template('blog/export.html')
 
-@bp.route('/get_files/', methods=['GET', 'POST'])
+@bp.route('/get_files/', methods=['GET'])
 @login_required
 def get_files():
 	conn = get_db()
